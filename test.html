@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <div class="topnav">
+  <p> A PUTT TO WIN </p>
+</div>
+<style>
+.topnav {
+  background-color: #009933;
+  overflow: hidden;
+  text-align: center;
+}
+
+</style>
+        <title> A PUTT TO WIN </title>
+    </head>
+    <body style="font-family: Lekton; font-size: 24pt">
+        
+        
+        
+        <div id="page" style=" width: 100% font-size: 14pt; overflow: scroll">
+        <p >CLUB HOUSE</p>
+       
+        
+        <form id="conversation" onsubmit="sendInput()" action="javascript:void(0);">
+                
+            <label>Number of holes</label>
+<input type="text" id="holes" name="holes" autocomplete="off" size=2 />
+</br>
+<label>Player 1</label>
+<input type="text" id="p1" name="p1" autocomplete="off" size="20" />
+</br>
+<label>Player 2</label>
+<input type="text" id="p2" name="p2" autocomplete="off" size="20"  />
+</br>
+<label>Player 3<label>
+<input type="text" id="p3" name="p3" autocomplete="off" size="20" />
+</br>
+<label>Player 4</label>
+<input type="text" id="p4" name="p4" autocomplete="off" size="20" />
+</br>
+
+<input type="submit" id="sub" name="sub" value="Tee off" style="width:90px" />
+        
+        </form>
+        </div>
+        <script type="text/javascript">
+            var ws = new WebSocket("ws://" + location.hostname + ":80");
+                
+                ws.onmessage = function (evt) {
+                    
+                    console.log(evt.data)
+                    document.getElementById("page").innerHTML = evt.data;
+            }     
+            function sendInput(){
+                var holes = document.getElementById("holes").value;
+                var userInput = document.getElementById("p1").value;
+                var userInput2 = document.getElementById("p2").value;
+                var userInput3 = document.getElementById("p3").value;
+                var userInput4 = document.getElementById("p4").value;
+                var message = holes.concat(',',userInput,',' ,userInput2,',' ,userInput3,',' ,userInput4);
+                ws.send(message);
+            }
+            function sendCorrection(){
+                ws.send('correction')
+            }
+            function sendPlay(){
+                ws.send('play')
+            }
+        </script>
+    </body>
