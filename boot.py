@@ -25,8 +25,8 @@ from time import sleep
 import gc
 gc.collect()
 
-ssid = 'ATT8Pnb9mG' # Add wifi-manager
-password = '7whr4hsk69xn'
+ssid = 'YOUR WIFI NETWORK' # Add wifi-manager
+password = 'YOU WIFI PASSWORD'
 station = network.WLAN(network.STA_IF)
 station.active(True)
 station.connect(ssid, password)
